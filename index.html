@@ -13,6 +13,23 @@
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="chart.js"></script>
 
+    <h2>Введите свою формулу</h2>
+    <div class="error"></div>
+    <div class="formula">
+        <div class="chislitel">
+            <div class="chIn"></div>
+        </div>
+        <div class="znIn"></div>
+    </div>
+    <div class="blocksOutput">
+        <div class="blockOutput" id="1">1</div>
+        <div class="blockOutput" id="k">K</div>
+        <div class="blockOutput" id="p">P</div>
+        <div class="blockOutput" id="a">Tp+1</div>
+        <div class="blockOutput" id="b">Tp - 1</div>
+        <div class="blockOutput" id="c">1 - Tp</div>
+    </div>
+    <div class="btnDoIt">Посчитать</div>
     <!-- Готовим контейнер для диаграммы -->
     <div id="content" align="center">
         <div class="my-primer">
@@ -284,5 +301,7 @@
         }
         window.addEventListener("load", Diagram); 
     </script>
+    <script type="text/javascript" src="formula.js"></script>
+
 </body>
 </html>
