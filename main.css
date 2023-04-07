@@ -1,0 +1,86 @@
+h2{
+    text-align: center;
+}
+.error {
+    width: fit-content;
+    margin: 0 auto 10px;
+    color: red;
+    font-weight: 700;
+}
+.chislitel, .znamenatel {
+    display: flex;
+    width: fit-content;
+}
+.formula {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    margin: 0 auto;
+}
+.btnDoIt {
+    margin: 15px auto;
+    padding: 10px 15px;
+    background: #00ffe5;
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 20%);
+    cursor: pointer;
+}
+.chislitel {
+    margin-top: 10px;
+    border-bottom: 1px solid black;
+}
+.formula .chislitel{
+    margin: 0 auto;
+}
+.chIn, .znIn {
+    min-width: 80px;
+    background: #cfcfcfab;
+    height: 20px;
+    border-radius: 10px;
+    margin: 2px auto;
+    cursor: pointer;
+    display: flex;
+    padding: 5px 10px;
+    transition: 0.2s all;
+}
+.chIn.active, .znIn.active{
+    background-color: #f9ae55de;
+}
+.blocksOutput {
+    display: flex;
+    width: 550px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+.blockOutput{
+    cursor: pointer;
+    min-width: 40px;
+    height: 20px;
+    text-align: center;
+    background-color: bisque;
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+@media(max-width:540px){
+    #myChart, #myChart2, #myChart3{
+        max-width: 400px;
+        max-height: 300px;
+    }
+}
+@media(max-width:420px){
+    #myChart, #myChart2, #myChart3{
+        max-width: 350px;
+        max-height: 250px;
+    }
+}
+@media(max-width:360px){
+    #myChart, #myChart2, #myChart3{
+        max-width: 300px;
+        max-height: 200px;
+    }
+}
