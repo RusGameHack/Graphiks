@@ -75,7 +75,6 @@ h2{
     justify-content: space-between;
     margin: 0 auto;
     margin-top: 10px;
-    box-shadow: 4px 4px 41px -6px rgba(34, 60, 80, 0.2);
 }
 .blockOutput{
     cursor: pointer;
@@ -86,12 +85,23 @@ h2{
     padding: 10px 20px;
     border: 1px solid black;
     border-radius: 10px;
+    box-shadow: 4px 4px 41px -6px rgba(34, 60, 80, 0.2);
 }
 
 @media(max-width:540px){
     #myChart, #myChart2, #myChart3{
         max-width: 400px;
         max-height: 300px;
+    }
+    .blocksOutput {
+        display: flex;
+        width: 300px;
+    }
+    .blockOutput {
+        margin-bottom: 10px;
+    }
+    .formula {
+        width: 315px;
     }
 }
 @media(max-width:420px){
