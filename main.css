@@ -1,0 +1,27 @@
+.chislitel, .znamenatel {
+    display: flex;
+    width: fit-content;
+}
+
+.chislitel {
+    margin-top: 10px;
+    border-bottom: 1px solid black;
+}
+@media(max-width:540px){
+    #myChart, #myChart2, #myChart3{
+        max-width: 400px;
+        max-height: 300px;
+    }
+}
+@media(max-width:420px){
+    #myChart, #myChart2, #myChart3{
+        max-width: 350px;
+        max-height: 250px;
+    }
+}
+@media(max-width:360px){
+    #myChart, #myChart2, #myChart3{
+        max-width: 300px;
+        max-height: 200px;
+    }
+}
