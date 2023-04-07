@@ -16,7 +16,6 @@ const clickPole = (block) =>{
     activeIn = block;
 }
 
-
 //Ввод формул в поле
 primeri.forEach(primer => {
     primer.addEventListener('click', ()=>{
@@ -30,4 +29,14 @@ primeri.forEach(primer => {
             activeIn.innerHTML += `<div class="${primer.id}">(${primer.innerHTML})</div>`;
         }
     });
+});
+
+//Удаление формулы
+document.querySelector('.ClearCh').addEventListener('click', ()=>{
+    chInput.classList.remove('active');
+    chInput.innerHTML = '';
+});
+document.querySelector('.ClearZn').addEventListener('click', ()=>{
+    znInput.classList.remove('active');
+    znInput.innerHTML = '';
 });

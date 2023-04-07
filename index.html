@@ -18,8 +18,12 @@
     <div class="formula">
         <div class="chislitel">
             <div class="chIn"></div>
+            <div class="clearForm ClearCh">X</div>
         </div>
-        <div class="znIn"></div>
+        <div class="znamenatel">
+            <div class="znIn"></div>
+            <div class="clearForm ClearZn">X</div>
+        </div>
     </div>
     <div class="blocksOutput">
         <div class="blockOutput" id="1">1</div>
@@ -31,7 +35,7 @@
     </div>
     <div class="btnDoIt">Посчитать</div>
     <!-- Готовим контейнер для диаграммы -->
-    <div id="content" align="center">
+    <div id="content" align="center" class="onlyInWorkingForm">
         <div class="my-primer">
             <div class="chislitel" id="chislitel"></div>
             <div class="znamenatel" id="znamenatel"></div>
@@ -46,7 +50,7 @@
         </div>
         <canvas id="myChart" width="628" height="400"></canvas>
         <canvas id="myChart2" width="628" height="400"></canvas>
-        Направление: из зеленого в черный(для w < 0), из синего в желтый(для w > 0)
+        <div class="onlyInWorkingForm">Направление: из зеленого в черный(для w < 0), из синего в желтый(для w > 0)</div> 
         <canvas id="myChart3" width="628" height="400"></canvas>
     </div>
     <script type="text/javascript" src="diagrams.js"></script>

@@ -1,11 +1,29 @@
 h2{
     text-align: center;
 }
+.onlyInWorkingForm{
+    display: none;
+    margin: 0 auto;
+}
+.onlyInWorkingForm.active{
+    display: block;
+}
 .error {
     width: fit-content;
     margin: 0 auto 10px;
     color: red;
     font-weight: 700;
+}
+.clearForm {
+    position: absolute;
+    padding: 5px 10px;
+    font-weight: 700;
+    background: #ff0000b5;
+    border-radius: 10px;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 .chislitel, .znamenatel {
     display: flex;
@@ -31,8 +49,9 @@ h2{
     margin-top: 10px;
     border-bottom: 1px solid black;
 }
-.formula .chislitel{
+.formula .chislitel,.formula .znamenatel{
     margin: 0 auto;
+    position: relative;
 }
 .chIn, .znIn {
     min-width: 80px;
@@ -44,6 +63,7 @@ h2{
     display: flex;
     padding: 5px 10px;
     transition: 0.2s all;
+    position: relative;
 }
 .chIn.active, .znIn.active{
     background-color: #f9ae55de;
@@ -55,6 +75,7 @@ h2{
     justify-content: space-between;
     margin: 0 auto;
     margin-top: 10px;
+    box-shadow: 4px 4px 41px -6px rgba(34, 60, 80, 0.2);
 }
 .blockOutput{
     cursor: pointer;
@@ -66,6 +87,7 @@ h2{
     border: 1px solid black;
     border-radius: 10px;
 }
+
 @media(max-width:540px){
     #myChart, #myChart2, #myChart3{
         max-width: 400px;

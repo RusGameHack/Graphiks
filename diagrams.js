@@ -15,6 +15,10 @@ startGraph.addEventListener('click', () => {
     }
     //Исполнение
     else {
+        document.querySelectorAll('.onlyInWorkingForm').forEach(block => {
+            block.classList.add('active');
+        });
+
         const P = Math.PI; //Значение Pi
         var mass = [
             // # 1    K       P           "Tp + 1",                 "Tp - 1",                 "1 - Tp"
@@ -35,7 +39,7 @@ startGraph.addEventListener('click', () => {
         console.log(`Числитель: ${chislitel}, знаменатель: ${znamenatel}`);
 
 
-        
+
         let chBlock = [document.querySelector('#chislitel'), document.querySelector('#chislitel2'), document.querySelector('#chislitel3')];
         let znBlock = [document.querySelector('#znamenatel'), document.querySelector('#znamenatel2'), document.querySelector('#znamenatel3')];
         let ch = 0;
