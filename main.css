@@ -87,7 +87,11 @@ h2{
     border-radius: 10px;
     box-shadow: 4px 4px 41px -6px rgba(34, 60, 80, 0.2);
 }
-
+.my-primer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 @media(max-width:540px){
     #myChart, #myChart2, #myChart3{
         max-width: 400px;

@@ -15,17 +15,20 @@ startGraph.addEventListener('click', () => {
     }
     //Исполнение
     else {
+        document.querySelectorAll('.charts').forEach(element => {
+            element.innerHTML="";
+        });
         document.querySelectorAll('.onlyInWorkingForm').forEach(block => {
             block.classList.add('active');
         });
 
         const P = Math.PI; //Значение Pi
         var mass = [
-            // # 1    K       P           "Tp + 1",                 "Tp - 1",                 "1 - Tp"
-            ["1", "k", "p", "a", "b", "c"],
-            ["1", "K", "jw", "(Twj + 1)", "(Twj - 1)", "(1 - Twj)"],
-            ["1", "K", "w", "((1 + T*T*w*w)**0.5)", "((1 + T*T*w*w)**0.5)", "((1 + T*T*w*w)**0.5)"],
-            ["0", "0", "Pi/2", "arctg(T*w)", "(Pi - arctg(T*w))", "- arctg(T*w)"]
+            // # 1    K       P           "Tp + 1",                 "Tp - 1",                 "1 - Tp" "2Tp + 1"
+            ["1", "k", "p", "a", "b", "c", "a2"],
+            ["1", "K", "jw", "(Twj + 1)", "(Twj - 1)", "(1 - Twj)", "?"],
+            ["1", "K", "w", "((1 + T*T*w*w)**0.5)", "((1 + T*T*w*w)**0.5)", "((1 + T*T*w*w)**0.5)", "((1 + 2*T*T*w*w)**0.5)"],
+            ["0", "0", "Pi/2", "arctg(T*w)", "(Pi - arctg(T*w))", "- arctg(T*w)", "arctg(2*T*w)"]
         ]
 
         //Устанавливаем числитель и знаменатель
@@ -66,7 +69,7 @@ startGraph.addEventListener('click', () => {
         });
         ch = 0;
         znamenatel.forEach(element => {
-            console.log(`Числитель №${ch}`)
+            // console.log(`Числитель №${ch}`)
             // debugger;
 
             for (let i = 0; i < mass[0].length; i++) {
@@ -98,18 +101,19 @@ startGraph.addEventListener('click', () => {
         // ФЧХ
         var FCH = `(${document.querySelector('#chislitel3').innerHTML})`;
         FCH += ` - (${document.querySelector('#znamenatel3').innerHTML})`;
+        FCH = FCH.replace(/Pi\/2/g, '1.57079632675');
+        FCH = FCH.replace(/Pi/g, '3.1415926535');
         FCH = FCH.replace(/\//g, '-');
         FCH = FCH.replace(/j/g, '');
         FCH = FCH.replace(/0/g, '0');
         FCH = FCH.replace(/arctg/g, 'Math.atan');
-        FCH = FCH.replace(/Pi/g, '');
         FCH = FCH.replace(/T/g, '');
         FCH = FCH.replace(/\*/g, '+');
         FCH = FCH.replace(/w/g, 'x');
         FCH = FCH.replace(/x\(/g, 'x*(');
-        // FCH = FCH.replace(/\(-/g, '(');
-        // FCH = FCH.replace(/\(+/g, '(');
+        FCH = FCH.replace(/\(\+/g, '(');
         FCH = FCH.replace(/\)\(/g, ')*(');
+        FCH = FCH.replace(/\+\+/g, '+');
         console.log(FCH);
 
         Diagram();
@@ -143,13 +147,9 @@ startGraph.addEventListener('click', () => {
                     scales: {
                         xAxes: [{
                             display: true,
-                            stepSize: P / 2,
-                        min: 0,
-                        max: 2 * P
                         }],
                         yAxes: [{
                             ticks: {
-                                fixedStepSize: 0.1,
                                 suggestedMin: null,
                                 suggestedMax: null,
                             },
@@ -159,13 +159,41 @@ startGraph.addEventListener('click', () => {
                 }
             });
             //Заполняем данными
-            for(var x = -2 * P; x <= 2 * P; x += P / 2){
+            for(var x = -20; x <= 20; x += 1){
                 myChart.data.labels.push('' + x.toFixed(2));  
             }
-            for (var XX = -2 * P; XX <= 0; XX += P / 2) {
-                console.log(`f(x): ${f(XX)}`)
-                if (f(XX) == 100 || f(XX) == 100) {
-                    console.log('Остановили');
+            for (var XX = -20; XX <= 20; XX += 1) {
+                // console.log(`f(x): ${f(XX)}`)
+                if (f(XX) == 100 || f(XX) == 100) { 
+                    for (let X = 0; X <= 20; X += 1) {
+                        // console.log(`f(x): ${f(x)}`)
+                        if(X < 20) {
+                            // console.log(myChart.data.datasets[0].data[`${X}`].y)
+                            
+                            
+                            
+                            // try {
+                            //     myChart.data.datasets[0].data[`${X}`].y = myChart.data.datasets[0].data[`${X}`].y*(-1);
+                            // } catch (error) {
+                            //     console.log(`Перевертыш сломался на ${X}`)
+                            // }
+                        
+                        
+                        
+                        }
+                        // myChart.data.datasets[0].data[`${X}`]
+                        if (f(X) == 100 || f(X) == 100) {
+                            // console.log('Остановили');
+                        } else {
+                            myChart.data.datasets[1].data.push(
+                                {
+                                    x: X, 
+                                    y: f(X).toFixed(2) 
+                                }
+                            );
+                        }
+                    }
+                    break;
                 } else {
                     let YY = f(XX);
                     if(YY < 0){
@@ -174,7 +202,7 @@ startGraph.addEventListener('click', () => {
                     myChart.data.datasets[0].data.push(
                         {
                             x: XX, 
-                            y: YY.toFixed(2) 
+                            y: f(XX).toFixed(2) 
                         }
                     );
                     myChart.data.datasets[1].data.push(
@@ -185,19 +213,7 @@ startGraph.addEventListener('click', () => {
                     );
                 }
             }
-            for (var XX = 0; XX <= 2 * P; XX += P / 2) {
-                console.log(`f(x): ${f(x)}`)
-                if (f(XX) == 100 || f(XX) == 100) {
-                    console.log('Остановили');
-                } else {
-                    myChart.data.datasets[1].data.push(
-                        {
-                            x: XX, 
-                            y: f(XX).toFixed(2) 
-                        }
-                    );
-                }
-            }
+            
             //Обновляем
             myChart.update();
 
@@ -232,7 +248,7 @@ startGraph.addEventListener('click', () => {
                         {
                             label: 'ФЧХ положительное', //Метка
                             data: [], //Данные
-                            borderColor: 'red', //Цвет
+                            borderColor: 'blue', //Цвет
                             borderWidth: 2, //Толщина линии
                             fill: false //Не заполнять под графиком
                         }
@@ -245,55 +261,42 @@ startGraph.addEventListener('click', () => {
                             display: true
                         }],
                         yAxes: [{
-                            ticks: {
-                                min: -2 * P,
-                                max: 2 * P,
-                                suggestedMin: null,
-                                suggestedMax: null,
-                                fixedStepSize: 2
-                            },
                             display: true
                         }]
                     }
                 }
             });
-            var labels = ['-6', '-5', '-4', '-3', '-2', '-1', '0', '1', '2', '3', '4', '5', '6'];
+            // var labels = ['-6', '-5', '-4', '-3', '-2', '-1', '0', '1', '2', '3', '4', '5', '6'];
             //Заполняем данными
-            for(var x = -2 * P; x <= 2 * P; x += P / 10){
+            for(var x = -20; x <= 20; x += 1){
                 myChart.data.labels.push('' + x.toFixed(2));  
             }
-            for (var XX = -2 * P; XX <= 0; XX += P / 10) {
-                console.log(`f(x): ${f(XX)}`)
-                if (f(XX) == 100 || f(XX) == 100) {
-                    console.log('Остановили');
-                } else {
-                    let YY = f(XX);
-                    myChart.data.datasets[0].data.push(
-                        {
-                            x: XX, 
-                            y: YY.toFixed(2) 
-                        }
-                    );
-                    myChart.data.datasets[1].data.push(
-                        {
-                            x: null, 
-                            y: null,
-                        }
-                    );
-                }
+            for (var x = -20; x <= 0; x += 1) {
+                // console.log(`Значения x: ${x} , Y: {${f(x)}}`)
+                myChart.data.datasets[0].data.push(
+                    {
+                        x: x.toFixed(2), 
+                        y: (f(x).toFixed(2))
+                    }
+                );
             }
-            for (var XX = 0; XX <= 2 * P; XX += P / 2) {
-                console.log(`f(x): ${f(x)}`)
-                if (f(XX) == 100 || f(XX) == 100) {
-                    console.log('Остановили');
-                } else {
-                    myChart.data.datasets[1].data.push(
-                        {
-                            x: XX, 
-                            y: f(XX).toFixed(2) 
+            for (var x = 0; x <= 20; x += 1) {
+                // console.log(`Значения x: ${x} , Y: {${f(x)}}`)
+                if(x==0){
+                    if(myChart.data.datasets[0].data[`0`].y != 0){
+                        for (var x2 = 0; x2 <= 20; x2 += 1) {
+                            console.log(`До: ${myChart.data.datasets[0].data[`${x2}`].y}`)
+                            myChart.data.datasets[0].data[`${x2}`].y -= myChart.data.datasets[0].data[`20`].y * 2;
+                            console.log(`После: ${myChart.data.datasets[0].data[`${x2}`].y}`)
                         }
-                    );
+                    }
                 }
+                myChart.data.datasets[1].data.push(
+                    {
+                        x: x.toFixed(2), 
+                        y: (f(x).toFixed(2))
+                    }
+                );
             }
             myChart.update();
 
@@ -337,32 +340,32 @@ startGraph.addEventListener('click', () => {
                     responsive: false, //Вписывать в размер canvas
                     scales: {
                         xAxes: [{
-                            display: true
+                            display: true,
+                            ticks: {
+                                fixedStepSize: 2
+                            }
                         }],
                         yAxes: [{
-                            ticks: {
-                                fixedStepSize: 1.5
-                            },
                             display: true
                         }]
                     }
                 }
             });
-            var labels = ['-2π', '-3π/2', '-π', '-π/2', '0', 'π/2', 'π', '3π/2', '2π'];
-            var data = []; // массив точек
-            for (var x = 0; x <= 20; x += .2) {
+            // var labels = ['-2π', '-3π/2', '-π', '-π/2', '0', 'π/2', 'π', '3π/2', '2π'];
+            for (var x = 0; x <= 20; x += .1) {
                 var A = Number(eval(ACH));
                 var phi = Number(eval(FCH));
+                // console.log(x);
                 // console.log(`A: ${A}, Fi^ ${phi}`)
                 let XX = A * Math.cos(phi);
                 let YY = A * Math.sin(phi);
-                // console.log(`X: ${XX}, Y: ${YY}`)
-                myChart.data.labels.push(labels[((x + 2 * P) / (P / 2)).toFixed(0)]); //Добавляем соответствующую подпись на ось X
+                console.log(`X: ${XX}, Y: ${YY}`)  
+                // myChart.data.labels.push(labels[((x + 2 * P) / (P / 2)).toFixed(0)]); //Добавляем соответствующую подпись на ось X
                 if (XX < 100 && YY < 100 && XX > -100 && YY > -100) {
                     // console.log(`X: ${XX}, Y: ${YY}`)
                     if (x > 10) {
                         // console.log(myChart.getDatasetMeta(0).data[0])
-                        for (let b = 10; b < myChart.data.datasets[0].data.length; b++) {
+                        for (let b = 90; b < myChart.data.datasets[0].data.length; b++) {
                             var meta = myChart.getDatasetMeta(0);
                             var bar = meta.data[b];
                             bar.custom = bar.custom || {};
@@ -378,14 +381,14 @@ startGraph.addEventListener('click', () => {
 
             }
             let chet = 0;
-            for (var x = -20; x <= 0; x += .2) {
+            for (var x = -20; x <= 0; x += .1) {
                 var A = Number(eval(ACH));
                 var phi = Number(eval(FCH));
                 // console.log(`A: ${A}, Fi^ ${phi}`)
                 let XX = A * Math.cos(phi);
                 let YY = A * Math.sin(phi);
-                // console.log(`X: ${XX}, Y: ${YY}`)
-                myChart.data.labels.push(labels[((x + 2 * P) / (P / 2)).toFixed(0)]); //Добавляем соответствующую подпись на ось X
+                console.log(`X: ${XX}, Y: ${YY}`)
+                // myChart.data.labels.push(labels[((x + 2 * P) / (P / 2)).toFixed(0)]); //Добавляем соответствующую подпись на ось X
                 if (XX < 100 && YY < 100 && XX > -100 && YY > -100) {
                     // console.log(`X: ${XX}, Y: ${YY}`)
                     myChart.data.datasets[1].data.push({
@@ -394,7 +397,7 @@ startGraph.addEventListener('click', () => {
                     });
                     if (x > -10) {
                         // console.log(myChart.getDatasetMeta(1).data[0])
-                        for (let b = 90; b < myChart.data.datasets[1].data.length; b++) {
+                        for (let b = 2; b < myChart.data.datasets[1].data.length; b++) {
                             var meta = myChart.getDatasetMeta(1);
                             var bar = meta.data[b];
                             bar.custom = bar.custom || {};
@@ -403,10 +406,24 @@ startGraph.addEventListener('click', () => {
                         }
                     }
                 }
-
                 chet++;
             }
             myChart.update();
+            let buttonMin = document.querySelector('.minimizeChart3');
+            buttonMin.addEventListener('click', ()=>{
+                if(buttonMin.classList.contains('active')){
+                    buttonMin.classList.remove('active');
+                    myChart.options.scales['xAxes']['0']['ticks']['fixedStepSize'] = '1';
+                    console.log('Удалили active')
+                }
+                else {
+                    buttonMin.classList.add('active');
+                    myChart.options.scales['xAxes']['0']['ticks']['fixedStepSize'] = '.1';
+                    myChart.options.scales['yAxes']['0']['ticks']['fixedStepSize'] = '.1';
+                    console.log('Добавили active')
+                }
+                myChart.update();
+            });
         }
     }
 });

@@ -32,26 +32,37 @@
         <div class="blockOutput" id="a">Tp+1</div>
         <div class="blockOutput" id="b">Tp - 1</div>
         <div class="blockOutput" id="c">1 - Tp</div>
+        <div class="blockOutput" id="a2">2Tp+1</div>
     </div>
     <div class="btnDoIt">Посчитать</div>
     <!-- Готовим контейнер для диаграммы -->
     <div id="content" align="center" class="onlyInWorkingForm">
-        <div class="my-primer">
-            <div class="chislitel" id="chislitel"></div>
-            <div class="znamenatel" id="znamenatel"></div>
+        <div class="my-primer my-primer">
+            <div class="primerWho"></div>
+            <div class="primer">
+                <div class="chislitel" id="chislitel"></div>
+                <div class="znamenatel" id="znamenatel"></div>
+            </div>
         </div>
-        <div class="my-primer2">
-            <div class="chislitel" id="chislitel2"></div>
-            <div class="znamenatel" id="znamenatel2"></div>
+        <div class="my-primer2 my-primer">
+            <div class="primerWho">A(w) = </div>
+            <div class="primer">
+                <div class="chislitel" id="chislitel2"></div>
+                <div class="znamenatel" id="znamenatel2"></div>
+            </div>
         </div>
-        <div class="my-primer3">
-            <div class="chislitel" id="chislitel3"></div>
-            <div class="znamenatel" id="znamenatel3"></div>
+        <div class="my-primer3 my-primer">
+            <div class="primerWho">&#966;(w) = </div>
+            <div class="primer">
+                <div class="chislitel" id="chislitel3"></div>
+                <div class="znamenatel" id="znamenatel3"></div>
+            </div>
         </div>
-        <canvas id="myChart" width="628" height="400"></canvas>
-        <canvas id="myChart2" width="628" height="400"></canvas>
+        <canvas id="myChart" class="charts" width="628" height="400"></canvas>
+        <canvas id="myChart2" class="charts" width="628" height="400"></canvas>
         <div class="onlyInWorkingForm">Направление: из зеленого в черный(для w < 0), из синего в желтый(для w > 0)</div> 
-        <canvas id="myChart3" width="628" height="400"></canvas>
+        <canvas id="myChart3" class="charts" width="628" height="400"></canvas>
+        <div class="minimizeChart3">Уменьшить масштаб, если не видно график</div>
     </div>
     <script type="text/javascript" src="diagrams.js"></script>
     <script type="text/javascript" src="formula.js"></script>
