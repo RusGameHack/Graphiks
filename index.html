@@ -58,11 +58,19 @@
                 <div class="znamenatel" id="znamenatel3"></div>
             </div>
         </div>
-        <canvas id="myChart" class="charts" width="628" height="400"></canvas>
-        <canvas id="myChart2" class="charts" width="628" height="400"></canvas>
-        <div class="onlyInWorkingForm">Направление: из зеленого в черный(для w < 0), из синего в желтый(для w > 0)</div> 
-        <canvas id="myChart3" class="charts" width="628" height="400"></canvas>
-        <div class="minimizeChart3">Уменьшить масштаб, если не видно график</div>
+        <div class="chartsBlock">
+            <div class="chartBlock">
+                <canvas id="myChart" class="charts" width="628" height="400"></canvas>
+            </div>
+            <div class="chartBlock">
+                <canvas id="myChart2" class="charts" width="628" height="400"></canvas>
+            </div>
+            <div class="chartBlock">
+                <div class="onlyInWorkingForm">Направление: из зеленого в черный(для w < 0), из синего в желтый(для w > 0)</div> 
+                <canvas id="myChart3" class="charts" width="628" height="400"></canvas>
+                <div class="minimizeChart3">Уменьшить масштаб, если не видно график</div>
+            </div>
+        </div>
     </div>
     <script type="text/javascript" src="diagrams.js"></script>
     <script type="text/javascript" src="formula.js"></script>

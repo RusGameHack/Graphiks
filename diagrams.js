@@ -117,11 +117,29 @@ startGraph.addEventListener('click', () => {
         FCH = FCH.replace(/2\+x/g, '2*x');
         console.log(FCH);
 
+        document.querySelectorAll('.chartBlock').forEach(element => {
+            element.remove();
+        });
+
+        document.querySelector('.chartsBlock').innerHTML += `
+                <div class="chartBlock">
+                    <canvas id="myChart" class="charts" width="628" height="400"></canvas>
+                </div>
+                <div class="chartBlock">
+                    <canvas id="myChart2" class="charts" width="628" height="400"></canvas>
+                </div>
+                <div class="chartBlock">
+                    <div class="onlyInWorkingForm">Направление: из зеленого в черный(для w < 0), из синего в желтый(для w > 0)</div> 
+                    <canvas id="myChart3" class="charts" width="628" height="400"></canvas>
+                    <div class="minimizeChart3">Уменьшить масштаб, если не видно график</div>
+                </div>
+            `;
         Diagram();
         Diagram2();
         Diagram3();
 
         function Diagram() {
+            
             var ctx = document.getElementById("myChart");
             var myChart = new Chart(ctx, {
                 type: 'line',
@@ -167,22 +185,6 @@ startGraph.addEventListener('click', () => {
                 // console.log(`f(x): ${f(XX)}`)
                 if (f(XX) == 100 || f(XX) == 100) { 
                     for (let X = 0; X <= 20; X += 1) {
-                        // console.log(`f(x): ${f(x)}`)
-                        if(X < 20) {
-                            // console.log(myChart.data.datasets[0].data[`${X}`].y)
-                            
-                            
-                            
-                            // try {
-                            //     myChart.data.datasets[0].data[`${X}`].y = myChart.data.datasets[0].data[`${X}`].y*(-1);
-                            // } catch (error) {
-                            //     console.log(`Перевертыш сломался на ${X}`)
-                            // }
-                        
-                        
-                        
-                        }
-                        // myChart.data.datasets[0].data[`${X}`]
                         if (f(X) == 100 || f(X) == 100) {
                             // console.log('Остановили');
                         } else {
