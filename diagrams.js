@@ -27,7 +27,7 @@ startGraph.addEventListener('click', () => {
             // # 1    K       P           "Tp + 1",                 "Tp - 1",                 "1 - Tp" "2Tp + 1"
             ["1", "k", "p", "a", "b", "c", "a2"],
             ["1", "K", "jw", "(Twj + 1)", "(Twj - 1)", "(1 - Twj)", "?"],
-            ["1", "K", "w", "((1 + T*T*w*w)**0.5)", "((1 + T*T*w*w)**0.5)", "((1 + T*T*w*w)**0.5)", "((1 + 2*T*T*w*w)**0.5)"],
+            ["1", "K", "w", "((1 + T*T*w*w)**0.5)", "((1 + T*T*w*w)**0.5)", "((1 + T*T*w*w)**0.5)", "((1 + 4*T*T*w*w)**0.5)"],
             ["0", "0", "Pi/2", "arctg(T*w)", "(Pi - arctg(T*w))", "- arctg(T*w)", "arctg(2*T*w)"]
         ]
 
@@ -114,6 +114,7 @@ startGraph.addEventListener('click', () => {
         FCH = FCH.replace(/\(\+/g, '(');
         FCH = FCH.replace(/\)\(/g, ')*(');
         FCH = FCH.replace(/\+\+/g, '+');
+        FCH = FCH.replace(/2\+x/g, '2*x');
         console.log(FCH);
 
         Diagram();
