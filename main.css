@@ -70,7 +70,7 @@ h2{
 }
 .blocksOutput {
     display: flex;
-    width: 550px;
+    width: 625px;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 auto;
@@ -119,4 +119,11 @@ h2{
         max-width: 300px;
         max-height: 200px;
     }
+}
+span.up {
+    position: relative;
+    font-size: 10px;
+}
+.primer .chislitel{
+    margin: 0;
 }

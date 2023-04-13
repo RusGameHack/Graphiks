@@ -96,6 +96,12 @@ startGraph.addEventListener('click', () => {
         // ACH = ACH.replace(/\(-/g, '(');
         // ACH = ACH.replace(/\(+/g, '(');
         ACH = ACH.replace(/\)\(/g, ')*(');
+        let stroyACHCh = document.querySelector('#chislitel2').innerHTML;
+        let stroyACHZh = document.querySelector('#znamenatel2').innerHTML;
+        stroyACHCh = stroyACHCh.replace(/T\*T/g, 'T<span class="up">2</span>');
+        stroyACHCh = stroyACHCh.replace(/w\*w/g, 'w<span class="up">2</span>');
+        stroyACHZh = stroyACHZh.replace(/T\*T/g, 'T<span class="up">2</span>');
+        stroyACHZh = stroyACHZh.replace(/w\*w/g, 'w<span class="up">2</span>');
         console.log(ACH);
 
         // ФЧХ
@@ -116,16 +122,36 @@ startGraph.addEventListener('click', () => {
         FCH = FCH.replace(/\+\+/g, '+');
         FCH = FCH.replace(/2\+x/g, '2*x');
         console.log(FCH);
-
+        let stroyFCH = FCH.replace(/0\+/g, '');
+        stroyFCH = stroyFCH.replace(/Math.atan/g, 'artctg');
+        stroyFCH = stroyFCH.replace(/1.57079632675/g, 'π/2');
+        stroyFCH = stroyFCH.replace(/3.1415926535/g, 'π');
         document.querySelectorAll('.chartBlock').forEach(element => {
             element.remove();
         });
 
         document.querySelector('.chartsBlock').innerHTML += `
                 <div class="chartBlock">
+                    <div class="my-primer">
+                        <div class="primerWho">A(w) = </div>
+                        <div class="primer">
+                            <div class="chislitel">
+                                ${stroyACHCh}
+                            </div>
+                            <div class="znamenatel">
+                                ${stroyACHZh}
+                            </div>
+                        </div>
+                    </div>
                     <canvas id="myChart" class="charts" width="628" height="400"></canvas>
                 </div>
                 <div class="chartBlock">
+                    <div class="my-primer">
+                        <div class="primerWho">&#966;(w) = </div>
+                        <div class="primer">
+                            ${stroyFCH}
+                        </div>
+                    </div>
                     <canvas id="myChart2" class="charts" width="628" height="400"></canvas>
                 </div>
                 <div class="chartBlock">
@@ -138,8 +164,7 @@ startGraph.addEventListener('click', () => {
         Diagram2();
         Diagram3();
 
-        function Diagram() {
-            
+        function Diagram() {          
             var ctx = document.getElementById("myChart");
             var myChart = new Chart(ctx, {
                 type: 'line',
@@ -182,12 +207,17 @@ startGraph.addEventListener('click', () => {
                 myChart.data.labels.push('' + x.toFixed(2));  
             }
             for (var XX = -20; XX <= 20; XX += 1) {
-                // console.log(`f(x): ${f(XX)}`)
                 if (f(XX) == 100 || f(XX) == 100) { 
+                    //UPDATE
+                    for (var XX = 0; XX <= 20; XX += 1) {
+                        try {
+                            myChart.data.datasets[0].data[`${XX}`].y *= (-1);
+                            // console.log('Перевертыш')
+                        } catch (error) {}
+                    }
                     for (let X = 0; X <= 20; X += 1) {
-                        if (f(X) == 100 || f(X) == 100) {
-                            // console.log('Остановили');
-                        } else {
+                        if (f(X) == 100 || f(X) == 100) {} 
+                        else {
                             myChart.data.datasets[1].data.push(
                                 {
                                     x: X, 
@@ -288,9 +318,9 @@ startGraph.addEventListener('click', () => {
                 if(x==0){
                     if(myChart.data.datasets[0].data[`0`].y != 0){
                         for (var x2 = 0; x2 <= 20; x2 += 1) {
-                            console.log(`До: ${myChart.data.datasets[0].data[`${x2}`].y}`)
+                            // console.log(`До: ${myChart.data.datasets[0].data[`${x2}`].y}`)
                             myChart.data.datasets[0].data[`${x2}`].y -= myChart.data.datasets[0].data[`20`].y * 2;
-                            console.log(`После: ${myChart.data.datasets[0].data[`${x2}`].y}`)
+                            // console.log(`После: ${myChart.data.datasets[0].data[`${x2}`].y}`)
                         }
                     }
                 }
@@ -362,7 +392,7 @@ startGraph.addEventListener('click', () => {
                 // console.log(`A: ${A}, Fi^ ${phi}`)
                 let XX = A * Math.cos(phi);
                 let YY = A * Math.sin(phi);
-                console.log(`X: ${XX}, Y: ${YY}`)  
+                // console.log(`X: ${XX}, Y: ${YY}`)  
                 // myChart.data.labels.push(labels[((x + 2 * P) / (P / 2)).toFixed(0)]); //Добавляем соответствующую подпись на ось X
                 if (XX < 100 && YY < 100 && XX > -100 && YY > -100) {
                     // console.log(`X: ${XX}, Y: ${YY}`)
@@ -390,7 +420,7 @@ startGraph.addEventListener('click', () => {
                 // console.log(`A: ${A}, Fi^ ${phi}`)
                 let XX = A * Math.cos(phi);
                 let YY = A * Math.sin(phi);
-                console.log(`X: ${XX}, Y: ${YY}`)
+                // console.log(`X: ${XX}, Y: ${YY}`)
                 // myChart.data.labels.push(labels[((x + 2 * P) / (P / 2)).toFixed(0)]); //Добавляем соответствующую подпись на ось X
                 if (XX < 100 && YY < 100 && XX > -100 && YY > -100) {
                     // console.log(`X: ${XX}, Y: ${YY}`)
